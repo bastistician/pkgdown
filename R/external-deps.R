@@ -35,7 +35,7 @@ external_dependencies <- function(pkg, call = caller_env()) {
         )
       )
     ),
-    cached_dependency(
+    if(0) cached_dependency(
       name = "search",
       version = "1.0.0",
       files = list(

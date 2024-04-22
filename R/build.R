@@ -472,11 +472,6 @@ build_site_local <- function(
     build_llm_docs(pkg)
   }
   build_redirects(pkg, override = override)
-  if (pkg$bs_version == 3) {
-    build_docsearch_json(pkg)
-  } else {
-    build_search(pkg, override = override)
-  }
 
   check_built_site(pkg)
 
