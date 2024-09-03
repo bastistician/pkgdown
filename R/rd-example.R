@@ -150,6 +150,11 @@ as_example.tag_donttest <- function(x, run_dont_run = FALSE) {
 #' @export
 as_example.tag_dontshow <- function(x, run_dont_run = FALSE) {
   ex <- flatten_ex(x, run_dont_run = run_dont_run)
+  ## NOTE: only disappears via highlight_examples() if built with
+  ##       examples = TRUE; dropping DONTSHOW in highlight_text()
+  ##       while keeping source comments is a non-trivial task
+  cli::cli_warn("kludge: completely ignoring \\dontshow block")
+  return("")
   paste0("DONTSHOW({", ex, "})")
 }
 #' @export
