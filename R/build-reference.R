@@ -350,6 +350,13 @@ data_reference_topic <- function(
   local_context_eval(pkg$figures, pkg$src_path)
   withr::local_options(list(downlit.rdname = get_rdname(topic)))
 
+  ## downlit::highlight() registers attached packages without resetting,
+  ## so downlit:::find_rdname_attached() would, e.g., find ?Matrix::colSums
+  ## for colSums() also in *later* examples that don't attach 'Matrix' ...
+  ## => reset the option here, so for each topic:
+  pkgdeps <- setdiff(subset(pkg$desc$get_deps(), type == "Depends")$package, "R")
+  withr::local_options(list(downlit.attached = c(pkg$package, pkgdeps)))
+
   tag_names <- purrr::map_chr(topic$rd, ~ class(.)[[1]])
   tags <- split(topic$rd, tag_names)
 
