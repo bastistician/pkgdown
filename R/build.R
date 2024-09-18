@@ -465,6 +465,7 @@ build_site_local <- function(
     quiet = quiet,
     preview = FALSE
   )
+  if (nrow(pkg$tutorials))
   build_tutorials(pkg, override = override, preview = FALSE)
   build_news(pkg, override = override, preview = FALSE)
   build_sitemap(pkg)
