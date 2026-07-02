@@ -85,7 +85,7 @@ reference_redirects <- function(pkg) {
   redirects <- redirects[valid_filename(names(redirects))]
 
   # Ensure we don't override an existing file
-  redirects <- redirects[setdiff(names(redirects), pkg$topics$file_out)]
+  redirects <- redirects[setdiff(names(redirects), c(pkg$topics$file_out, "index.html"))]
 
   unname(purrr::imap(
     redirects,
